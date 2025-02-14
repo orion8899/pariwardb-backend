@@ -41,19 +41,39 @@
         <select id="relation" name="relation" required>
             <option value="पुत्र">पुत्र</option>
             <option value="पुत्री">पुत्री</option>
+            <option value="पोता">पोता</option>
+            <option value="पोती">पोती</option>
+            <option value="नाती">नाती</option>
+            <option value="नातिन">नातिन</option>
+            <option value="पंती">पंती</option>
+            <option value="पंतन">पंतन</option>
         </select>
 
         <label for="mobile">मोबाइल नंबर:</label>
         <input type="tel" id="mobile" name="mobile" required>
 
         <label for="state">राज्य:</label>
-        <select id="state" name="state" required>
+        <select id="state" name="state" required onchange="populateSambhag()">
             <option value="anya">अन्य</option>
             <option value="madhya pradesh">मध्य प्रदेश</option>
+            <option value="uttar pradesh">उत्तर प्रदेश</option>
+        </select>
+
+        <label for="sambhag">संभाग:</label>
+        <select id="sambhag" name="sambhag" onchange="populateJila()">
+            <option value="">चुनें</option>
+        </select>
+
+        <label for="jila">जिला:</label>
+        <select id="jila" name="jila">
+            <option value="">चुनें</option>
         </select>
 
         <label for="address">पता:</label>
         <textarea id="address" name="address" required></textarea>
+
+        <label for="organization">अन्य जानकारी:</label>
+        <input type="text" id="organization" name="organization">
 
         <button type="submit">Submit</button>
     </form>
