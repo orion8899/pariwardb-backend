@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्वतंत्रता सेनानी उत्तराधिकारी पंजीकरण</title>
+    <style>
+        body { font-family: sans-serif; }
+        h1 { text-align: center; }
+        form { width: 50%; margin: 0 auto; }
+        label { display: block; margin-bottom: 5px; }
+        select, input, textarea {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+        select:focus, input:focus, textarea:focus { border-color: #4CAF50; outline: none; }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>स्वतंत्रता सेनानी उत्तराधिकारी पंजीकरण</h1>
+    <form id="registrationForm">
+        <label for="name">नाम:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="freedomFighterName">स्वतंत्रता सेनानी का नाम:</label>
+        <input type="text" id="freedomFighterName" name="freedomFighterName" required>
+
+        <label for="relation">स्वतंत्रता सेनानी संबंध:</label>
+        <select id="relation" name="relation" required>
+            <option value="पुत्र">पुत्र</option>
+            <option value="पुत्री">पुत्री</option>
+        </select>
+
+        <label for="mobile">मोबाइल नंबर:</label>
+        <input type="tel" id="mobile" name="mobile" required>
+
+        <label for="state">राज्य:</label>
+        <select id="state" name="state" required>
+            <option value="anya">अन्य</option>
+            <option value="madhya pradesh">मध्य प्रदेश</option>
+        </select>
+
+        <label for="address">पता:</label>
+        <textarea id="address" name="address" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => { data[key] = value; });
+
+            fetch('https://pariwardb-backend.onrender.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(message => {
+                alert(message.message);
+                document.getElementById('registrationForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("डेटा सबमिट करने में त्रुटि!");
+            });
+        });
+    </script>
+</body>
+</html>
